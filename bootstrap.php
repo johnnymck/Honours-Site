@@ -18,9 +18,9 @@ $config = [
         'password' => 'root',
         'host' => 'localhost',
         'database' => 'devjmckenzie_property',
-        'charset'   => 'utf8',
+        'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
+        'prefix' => '',
     ],
 ];
 // Create app
@@ -38,7 +38,7 @@ $container = $app->getContainer();
 // Register component on container
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('templates', [
-        'cache' => false
+        'cache' => false,
     ]);
 
     // Instantiate and add Slim specific extension
@@ -53,13 +53,13 @@ $capsule->addConnection($config['db']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$container['session'] = function($c) {
+$container['session'] = function ($c) {
     return new \SlimSession\Helper;
 };
 
 $container['upload_directory'] = __DIR__ . '/uploads';
 
-$container['ensure_admin'] = function($request, $response, $next) {
+$container['assert_admin'] = function ($request, $response, $next) {
     if (isset($this->container->get('session')->username) && $this->container->get('session')->is_admin) {
         return $next($request, $response);
     } else {
