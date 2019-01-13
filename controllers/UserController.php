@@ -66,6 +66,7 @@ class UserController
 
     public function index($request, $response, $args)
     {
-        return $response->withStatus(200)->getBody()->write("Hello, world!");
+        return $this->container->get('view')->render($response, 'index.twig', []);
+        //return $response->withStatus(200)->getBody()->write("Hello, world!");
     }
 }
