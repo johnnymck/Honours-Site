@@ -1,13 +1,6 @@
 <?php
-// Render Twig template in route
-$app->get('/hello/{name}', function ($request, $response, $args) {
-    return $this->view->render($response, 'name.twig', [
-        'name' => $args['name']
-    ]);
-})->setName('profile');
-
 // Render Twig template within container
-$app->get('/', 'Controllers\\PropertyController:index');
+$app->get('/', 'Controllers\\UserController:index');
 $app->get('/property', 'Controllers\\PropertyController:allProperties');
 $app->get('/property/{id}', 'Controllers\\PropertyController:singleProperty');
 $app->post('/editpost/{id}', 'Controllers\\PropertyController:editpost');
