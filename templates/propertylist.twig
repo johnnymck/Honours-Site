@@ -1,0 +1,36 @@
+{% include 'nav.twig' %}
+<table>
+<tr>
+    <th>ID</th>
+    <th>Address</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th># of bedrooms</th>
+    <th># of bathrooms</th>
+    <th>Price</th>
+    <th>Sale</th>
+    {% if admin %}
+    <th>Edit/Delete</th>
+    {% endif %}
+</tr>
+{% for property in properties %}
+    <tr>
+        <td><a href='/property/{{ property.id }}'>{{ property.id }}</a></td>
+        <td><a href='/property/{{ property.id }}'>{{ property.displayable_address }}</a></td>
+        <td><a href='/property/{{ property.id }}'><img src='{{ property.image }}'/></a></td>
+        <td>{{ property.description }}</td>
+        <td>{{ property.no_rooms }}</td>
+        <td>{{ property.no_bathrooms }}</td>
+        <td>{{ property.price }}</td>
+        {% if property.sale %}
+            <td>{{ 'for sale' }}</td>
+        {% else %}
+            <td>{{ 'for rent' }}</td>
+        {% endif %}
+        {% if admin %}
+        <td><a href='/edit/{{ property.id }}'>edit</a> | <a href='/delete/{{ property.id }}'>delete</a></td>
+        {% endif %}
+    </tr>
+    
+{% endfor %}
+</table>

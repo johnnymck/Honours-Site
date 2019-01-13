@@ -1,0 +1,14 @@
+<html>
+<body>
+    <h1>ADMIN</h1>
+    <a href="logout">logout</a>
+    <h2>View Properties</h2>
+    {% include 'propertylist.twig' %}
+    <p><a href="">add</a></p>
+    </body>
+    <script>
+    function confirmDelete() {
+        return confirm('Are you sure you wish to delete this property? This cannot be undone!');
+    }
+    </script>
+    </html>

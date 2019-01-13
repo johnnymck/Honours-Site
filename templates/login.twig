@@ -1,0 +1,15 @@
+{% include 'head.twig' %}
+    <body>
+        {% include 'nav.twig' %}
+        <h1>Login</h1>
+        <form action="login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" name="username" />
+            <br />
+            <label for="password">Password</label>
+            <input type="password" name="password" />
+            <br />
+            <input type="submit" value="login"/>
+        </form>
+    </body>
+{% include 'foot.twig' %}
