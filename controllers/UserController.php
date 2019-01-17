@@ -24,7 +24,7 @@ class UserController
         $params = $request->getParsedBody();
         if ($this->validateLogin($params['username'], $params['password'])) {
             $this->container->get('session')->set('username', $params['username']);
-            $this->container->get('session')->set('is_admin', UserModel::where('username', $params['username'])->first()->is_admin);
+            $this->container->get('session')->set('is_admin', UserModel::where('username', $params['username'])->first()->isAdmin);
             return $response->withStatus(200)->withRedirect('/admin');
         } else {
             return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
@@ -33,15 +33,9 @@ class UserController
 
     public function validateLogin($username, $password)
     {
-        $user = UserModel::where('username', $username)->first();
+        $user = UserModel::where('email', $username)->first();
         if ($user != null) {
-            if (password_verify($password, $user->password)) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
+            return(password_verify($password, $user->password)
         }
     }
 
