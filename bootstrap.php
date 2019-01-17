@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = 'root';
-$dbname = 'devjmckenzie_property';
+$dbname = 'dev_hons_project';
 
 $config = [
     'debug' => true,
@@ -14,10 +14,10 @@ $config = [
     'addContentLengthHeader' => false,
     'db' => [
         'driver' => 'mysql',
-        'username' => 'root',
-        'password' => 'root',
+        'username' => $dbuser,
+        'password' => $dbpass,
         'host' => 'localhost',
-        'database' => 'devjmckenzie_property',
+        'database' => $dbhost,
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix' => '',
@@ -27,7 +27,7 @@ $config = [
 $app = new \Slim\App(['settings' => $config]);
 
 $app->add(new \Slim\Middleware\Session([
-    'name' => 'propertystore',
+    'name' => 'userstore',
     'autorefresh' => true,
     'lifetime' => '2 hours',
 ]));
