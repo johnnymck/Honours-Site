@@ -16,8 +16,8 @@ $config = [
         'driver' => 'mysql',
         'username' => $dbuser,
         'password' => $dbpass,
-        'host' => 'localhost',
-        'database' => $dbhost,
+        'host' => $dbhost,
+        'database' => $dbname,
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix' => '',
@@ -60,7 +60,7 @@ $container['session'] = function ($c) {
 $container['upload_directory'] = __DIR__ . '/uploads';
 
 $container['assert_admin'] = function ($request, $response, $next) {
-    if (isset($this->container->get('session')->username) && $this->container->get('session')->is_admin) {
+    if (isset($this->container->get('session')->email) && $this->container->get('session')->is_admin) {
         return $next($request, $response);
     } else {
         return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
