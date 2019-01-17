@@ -22,18 +22,18 @@ class UserController
     public function loginpost($request, $response, $args)
     {
         $params = $request->getParsedBody();
-        if ($this->validateLogin($params['username'], $params['password'])) {
-            $this->container->get('session')->set('username', $params['username']);
-            $this->container->get('session')->set('is_admin', UserModel::where('username', $params['username'])->first()->isAdmin);
+        if ($this->validateLogin($params['email'], $params['password'])) {
+            $this->container->get('session')->set('email', $params['email']);
+            $this->container->get('session')->set('is_admin', UserModel::where('email', $params['email'])->first()->isAdmin);
             return $response->withStatus(200)->withRedirect('/admin');
         } else {
             return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
         }
     }
 
-    public function validateLogin($username, $password)
+    public function validateLogin($email, $password)
     {
-        $user = UserModel::where('email', $username)->first();
+        $user = UserModel::where('email', $email)->first();
         if ($user != null) {
             return (password_verify($password, $user->password));
         }
@@ -41,7 +41,7 @@ class UserController
 
     public function admin($request, $response, $args)
     {
-        if ($this->container->get('session')->exists('username')) {
+        if ($this->container->get('session')->exists('email')) {
             return $this->container->get('view')->render($response, 'admin.twig', [
                 'admin' => true,
                 'properties' => PropertyModel::all(),
@@ -53,8 +53,8 @@ class UserController
 
     public function logout($request, $response, $args)
     {
-        $this->container->get('session')->delete('username');
-        $this->container->get('session')->delete('is_admin');
+        $this->container->get('session')->delete('email');
+        $this->container->get('session')->delete('isAdmin');
         return $response->withStatus(200)->withRedirect('login');
     }
 
