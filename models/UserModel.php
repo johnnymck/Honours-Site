@@ -4,20 +4,25 @@ namespace Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserModel extends Model {
+class UserModel extends Model
+{
 
     protected $db;
-    protected $table = 'User';
+    protected $table = 'Users';
     protected $fillable = ['*'];
     protected $guarded = ['id'];
     public $timestamps = false;
 
     // default values must be set
-    public function __construct($username = "", $password = "", $firstname = "", $lastname = "", $is_admin = 0) {
-        $this->username = $username;
+    public function __construct($email = "", $password = "", $firstname = "", $lastname = "", $title = "", $address = "", $isAdmin = 0)
+    {
+        $this->email = $email;
         $this->password = password_hash($password, PASSWORD_DEFAULT);
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->is_admin = $is_admin;
+        $this->firstName = $firstname;
+        $this->lastName = $lastname;
+        $this->isAdmin = $isAdmin;
+        $this->workingAddress = $address;
+        $this->title = $title;
+        $this->isAdmin = $isAdmin;
     }
 }
