@@ -35,7 +35,7 @@ class UserController
     {
         $user = UserModel::where('email', $username)->first();
         if ($user != null) {
-            return(password_verify($password, $user->password)
+            return (password_verify($password, $user->password));
         }
     }
 
