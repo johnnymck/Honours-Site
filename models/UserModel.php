@@ -25,4 +25,12 @@ class UserModel extends Model
         $this->title = $title;
         $this->isAdmin = $isAdmin;
     }
+
+    public function validateLogin($email, $password)
+    {
+        $user = UserModel::where('email', $email)->first();
+        if ($user != null) {
+            return (password_verify($password, $user->password));
+        }
+    }
 }
