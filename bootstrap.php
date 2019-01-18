@@ -58,11 +58,3 @@ $container['session'] = function ($c) {
 };
 
 $container['upload_directory'] = __DIR__ . '/uploads';
-
-$container['assert_admin'] = function ($request, $response, $next) {
-    if (isset($this->container->get('session')->email) && $this->container->get('session')->is_admin) {
-        return $next($request, $response);
-    } else {
-        return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
-    }
-};
