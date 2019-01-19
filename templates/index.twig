@@ -1,3 +1,8 @@
 {% include "head.twig" %}
-    <h1>I'm a happy camper!</h1>
+    {% if name is defined %}
+    <h1>Welcome back, {{ name }}</h1>
+    {% else %}
+    <h1>Welcome!</h1>
+    {% endif %}
+    <p><a href="/login">Login<a></p>
 {% include "foot.twig" %}
