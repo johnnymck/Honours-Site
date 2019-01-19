@@ -24,7 +24,9 @@ class UserController
         $params = $request->getParsedBody();
         if (UserModel::validateLogin($params['email'], $params['password'])) {
             $this->container->get('session')->set('email', $params['email']);
-            $this->container->get('session')->set('is_admin', UserModel::where('email', $params['email'])->first()->isAdmin);
+            $this->container->get('session')->set('isAdmin', UserModel::where('email', $params['email'])->first()->isAdmin);
+            $this->container->get('session')->set('firstName', UserModel::where('email', $params['email'])->first()->firstName);
+            $this->container->get('session')->set('lastName', UserModel::where('email', $params['email'])->first()->lastName);
             return $response->withStatus(200)->withRedirect('/admin');
         } else {
             return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
@@ -33,7 +35,7 @@ class UserController
 
     public function admin($request, $response, $args)
     {
-        if ($this->container->get('session')->exists('email')) {
+        if ($this->container->get('session')->exists('email') && $this->container->get('session')->isAdmin) {
             return $this->container->get('view')->render($response, 'admin.twig', [
                 'admin' => true,
                 'projects' => ProjectModel::all(),
@@ -52,7 +54,13 @@ class UserController
 
     public function index($request, $response, $args)
     {
-        return $this->container->get('view')->render($response, 'index.twig', []);
-        //return $response->withStatus(200)->getBody()->write("Hello, world!");
+        if ($this->container->get('session')->email != null) {
+            return $this->container->get('view')->render($response, 'index.twig', [
+                'name' => $this->container->get('session')->firstName,
+            ]);
+        } else {
+            return $this->container->get('view')->render($response, 'index.twig', []);
+        }
+
     }
 }
