@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8d2868241fb8f249d1506c95e3f6bd7",
+    "content-hash": "83f0df16042c51d519596ab87d7080a6",
     "packages": [
         {
             "name": "bryanjhv/slim-session",
@@ -453,6 +453,59 @@
             "time": "2018-02-13T20:26:39+00:00"
         },
         {
+            "name": "osoobe/wtforms",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/b4oshany/wtforms-php.git",
+                "reference": "29c18329ebc8bf95d7989e70aaaf17681f3419fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/b4oshany/wtforms-php/zipball/29c18329ebc8bf95d7989e70aaaf17681f3419fe",
+                "reference": "29c18329ebc8bf95d7989e70aaaf17681f3419fe",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "smarty/smarty": ">=3.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5",
+                "twig/twig": "~1.23"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WTForms\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "José Manuel Peso",
+                    "homepage": "https://github.com/trilopin/",
+                    "role": "Creator"
+                },
+                {
+                    "name": "Oshane Bailey",
+                    "homepage": "https://github.com/b4oshany/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "WTForms for PHP",
+            "homepage": "https://github.com/b4oshany/wtforms-php",
+            "keywords": [
+                "Forms",
+                "php",
+                "wtforms"
+            ],
+            "time": "2015-12-30T04:10:40+00:00"
+        },
+        {
             "name": "pimple/pimple",
             "version": "v3.2.3",
             "source": {
@@ -770,6 +823,59 @@
                 "view"
             ],
             "time": "2018-05-07T10:54:29+00:00"
+        },
+        {
+            "name": "smarty/smarty",
+            "version": "v3.1.33",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smarty-php/smarty.git",
+                "reference": "dd55b23121e55a3b4f1af90a707a6c4e5969530f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/dd55b23121e55a3b4f1af90a707a6c4e5969530f",
+                "reference": "dd55b23121e55a3b4f1af90a707a6c4e5969530f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "libs/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Monte Ohrt",
+                    "email": "monte@ohrt.com"
+                },
+                {
+                    "name": "Uwe Tews",
+                    "email": "uwe.tews@googlemail.com"
+                },
+                {
+                    "name": "Rodney Rehm",
+                    "email": "rodney.rehm@medialize.de"
+                }
+            ],
+            "description": "Smarty - the compiling PHP template engine",
+            "homepage": "http://www.smarty.net",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2018-09-12T20:54:16+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
