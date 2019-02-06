@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use FormManager\Factory as F;
 use \Models\ProjectModel;
 use \Models\UserModel;
 
@@ -54,12 +55,24 @@ class UserController
 
     public function index($request, $response, $args)
     {
+        $userForm = F::form([
+            'username' => F::text('User name'),
+            'password' => F::password('Password'),
+            '' => F::submit('Login'),
+        ]);
+        $userForm->setAttributes([
+            'action' => '/signup',
+            'method' => 'post',
+        ]);
         if ($this->container->get('session')->email != null) {
             return $this->container->get('view')->render($response, 'index.twig', [
                 'name' => $this->container->get('session')->firstName,
+                'form' => $userForm,
             ]);
         } else {
-            return $this->container->get('view')->render($response, 'index.twig', []);
+            return $this->container->get('view')->render($response, 'index.twig', [
+                'form' => $userForm,
+            ]);
         }
 
     }

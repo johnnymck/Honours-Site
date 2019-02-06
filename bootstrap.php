@@ -57,4 +57,8 @@ $container['session'] = function ($c) {
     return new \SlimSession\Helper;
 };
 
+$container['forms'] = function ($c) {
+    return Symfony\Component\Form\Forms::createFormFactory();
+};
+
 $container['upload_directory'] = __DIR__ . '/uploads';
