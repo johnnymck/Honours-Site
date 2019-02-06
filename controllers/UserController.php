@@ -56,12 +56,12 @@ class UserController
     public function index($request, $response, $args)
     {
         $userForm = F::form([
-            'username' => F::text('User name'),
+            'username' => F::text('Username'),
             'password' => F::password('Password'),
             '' => F::submit('Login'),
         ]);
         $userForm->setAttributes([
-            'action' => '/signup',
+            'action' => '/login',
             'method' => 'post',
         ]);
         if ($this->container->get('session')->email != null) {
