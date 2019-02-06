@@ -59,8 +59,7 @@ class UserController
             'username' => F::text('Username'),
             'password' => F::password('Password'),
             '' => F::submit('Login'),
-        ]);
-        $userForm->setAttributes([
+        ])->setAttributes([
             'action' => '/login',
             'method' => 'post',
         ]);
