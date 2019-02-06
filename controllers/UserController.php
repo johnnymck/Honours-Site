@@ -56,7 +56,7 @@ class UserController
     public function index($request, $response, $args)
     {
         $userForm = F::form([
-            'username' => F::text('Username'),
+            'username' => F::email('Username'),
             'password' => F::password('Password'),
             '' => F::submit('Login'),
         ])->setAttributes([
