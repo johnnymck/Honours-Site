@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use FormManager\Factory as F;
 use Illuminate\Database\Eloquent\Model;
 
 class UserModel extends Model
@@ -32,5 +33,17 @@ class UserModel extends Model
         if ($user != null) {
             return (password_verify($password, $user->password));
         }
+    }
+
+    public static function getLoginForm()
+    {
+        return F::form([
+            'email' => F::email('Email Address'),
+            'password' => F::password('Password'),
+            '' => F::submit('Login'),
+        ])->setAttributes([
+            'action' => '/login',
+            'method' => 'post',
+        ]);
     }
 }
