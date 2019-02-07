@@ -45,6 +45,18 @@ class UserController
         }
     }
 
+    public function pendingUsers($request, $response, $args)
+    {
+        if ($this->container->get('session')->exists('email') && $this->container->get('session')->isAdmin) {
+            return $this->container->get('view')->render($response, 'pending-users.twig', [
+                'admin' => true,
+                'users' => UserModel::where('approved', '=', '0')->get(),
+            ]);
+        } else {
+            return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
+        }
+    }
+
     public function signup($request, $response, $args)
     {
         $signupForm = UserModel::getSignUpForm();
