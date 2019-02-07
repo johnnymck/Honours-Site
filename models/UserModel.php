@@ -32,8 +32,8 @@ class UserModel extends Model
     {
         $user = UserModel::where('email', $email)->first();
         if ($user != null) {
-            // reject login if not not validated user
-            if (!$user->validated) {
+            // reject login if not not approved user
+            if (!$user->approved) {
                 return false;
             } else {
                 return (password_verify($password, $user->password));
