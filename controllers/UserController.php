@@ -45,6 +45,31 @@ class UserController
         }
     }
 
+    public function signup($request, $response, $args)
+    {
+        $signupForm = UserModel::getSignUpForm();
+        return $this->container->get('view')->render($response, 'signup.twig', [
+            'form' => $signupForm,
+        ]);
+    }
+
+    public function signupPost($request, $response, $args)
+    {
+        $params = $request->getParsedBody();
+        $newUser = new UserModel(
+            $params['email'],
+            $params['password'],
+            $params['firstname'],
+            $params['lastname'],
+            $params['title'],
+            $params['address'],
+            0, //user not admin by default
+            0// user not approved by default
+        );
+        $newUser->save();
+        return $response->withStatus(200)->withRedirect('/login');
+    }
+
     public function logout($request, $response, $args)
     {
         $this->container->get('session')->delete('email');
