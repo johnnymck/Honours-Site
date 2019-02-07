@@ -15,7 +15,7 @@ class UserModel extends Model
     public $timestamps = false;
 
     // default values must be set
-    public function __construct($email = "", $password = "", $firstname = "", $lastname = "", $title = "", $address = "", $isAdmin = 0)
+    public function __construct($email = "", $password = "", $firstname = "", $lastname = "", $title = "", $address = "", $isAdmin = 0, $approved = 0)
     {
         $this->email = $email;
         $this->password = password_hash($password, PASSWORD_DEFAULT);
@@ -25,13 +25,19 @@ class UserModel extends Model
         $this->workingAddress = $address;
         $this->title = $title;
         $this->isAdmin = $isAdmin;
+        $this->approved = $approved;
     }
 
     public static function validateLogin($email, $password)
     {
         $user = UserModel::where('email', $email)->first();
         if ($user != null) {
-            return (password_verify($password, $user->password));
+            // reject login if not not validated user
+            if (!$user->validated) {
+                return false;
+            } else {
+                return (password_verify($password, $user->password));
+            }
         }
     }
 
@@ -50,9 +56,7 @@ class UserModel extends Model
     public static function getSignUpForm()
     {
         return F::form([
-            'firstname' => F::text('First Name'),
-            'lastname' => F::text('Last Name'),
-            'title' => F::option('Title', [
+            'title' => F::select('Title', [
                 'Mr.' => 'Mr.',
                 'Ms.' => 'Ms.',
                 'Miss' => 'Miss',
@@ -62,9 +66,12 @@ class UserModel extends Model
                 'Prof.' => 'Prof.',
                 'Rev.' => 'Rev.',
             ]),
+            'firstname' => F::text('First Name'),
+            'lastname' => F::text('Last Name'),
             'email' => F::email('Email Address'),
             'password' => F::password('Password'),
             'address' => F::textarea('Working address'),
+            '' => F::submit('Submit'),
         ])->setAttributes([
             'action' => '/signup',
             'method' => 'post',
