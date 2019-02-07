@@ -6,3 +6,4 @@ $app->get('/admin/{id}', 'Controllers\\UserController:adminById');
 $app->get('/login', 'Controllers\\UserController:login');
 $app->post('/login', 'Controllers\\UserController:loginpost');
 $app->get('/logout', 'Controllers\\UserController:logout');
+$app->post('/signup', 'Controllers\\UserController:signup');
