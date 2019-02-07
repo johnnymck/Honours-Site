@@ -1,0 +1,5 @@
+{% include 'head.twig' %}
+{% for user in users %}
+{{ user.firstName }} {{ user.lastName }} <br/>
+{% endfor %}
+{% include 'foot.twig' %}
