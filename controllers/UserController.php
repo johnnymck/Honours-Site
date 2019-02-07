@@ -49,7 +49,7 @@ class UserController
     {
         $this->container->get('session')->delete('email');
         $this->container->get('session')->delete('isAdmin');
-        return $response->withStatus(200)->withRedirect('login');
+        return $response->withStatus(200)->withRedirect('/');
     }
 
     public function index($request, $response, $args)
