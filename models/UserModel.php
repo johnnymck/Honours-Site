@@ -46,4 +46,28 @@ class UserModel extends Model
             'method' => 'post',
         ]);
     }
+
+    public static function getSignUpForm()
+    {
+        return F::form([
+            'firstname' => F::text('First Name'),
+            'lastname' => F::text('Last Name'),
+            'title' => F::option('Title', [
+                'Mr.' => 'Mr.',
+                'Ms.' => 'Ms.',
+                'Miss' => 'Miss',
+                'Mrs.' => 'Mrs.',
+                'Mx.' => 'Mx.',
+                'Dr.' => 'Dr.',
+                'Prof.' => 'Prof.',
+                'Rev.' => 'Rev.',
+            ]),
+            'email' => F::email('Email Address'),
+            'password' => F::password('Password'),
+            'address' => F::textarea('Working address'),
+        ])->setAttributes([
+            'action' => '/signup',
+            'method' => 'post',
+        ]);
+    }
 }
