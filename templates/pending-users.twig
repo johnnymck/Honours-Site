@@ -1,5 +1,12 @@
 {% include 'head.twig' %}
-{% for user in users %}
-{{ user.firstName }} {{ user.lastName }} <br/>
+<ul>
+{% for i in form %}
+<li>
+{{ i.data.firstName }}
+{{ i.data.lastName }}<br/>
+{{ i.data.email }}
+{{ i.form | raw }}
+</li>
 {% endfor %}
+</ul>
 {% include 'foot.twig' %}
