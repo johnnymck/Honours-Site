@@ -76,4 +76,21 @@ class UserModel extends Model
             'method' => 'post',
         ]);
     }
+
+    public static function getAsFormFields($fields)
+    {
+        $output = [];
+        foreach ($fields as $field) {
+            $form = F::form([
+                'id' => F::hidden($field->id),
+                'approve' => F::submit('Approve'),
+                'decline' => F::submit('Decline'),
+            ])->setAttributes([
+                'action' => '/admin/pending-users',
+                'method' => 'post',
+            ]);
+            array_push($output, ['data' => $field, 'form' => $form]);
+        }
+        return $output;
+    }
 }
