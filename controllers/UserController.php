@@ -48,12 +48,28 @@ class UserController
     public function pendingUsers($request, $response, $args)
     {
         if ($this->container->get('session')->exists('email') && $this->container->get('session')->isAdmin) {
+            $users = UserModel::where('approved', '=', '0')->get();
+            $form = UserModel::getAsFormFields($users);
             return $this->container->get('view')->render($response, 'pending-users.twig', [
                 'admin' => true,
-                'users' => UserModel::where('approved', '=', '0')->get(),
+                'form' => $form,
             ]);
         } else {
             return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
+        }
+    }
+
+    public function pendingUsersPost($request, $response, $args)
+    {
+        $params = $request->getParsedBody();
+        if (array_key_exists('decline', $params)) {
+            UserModel::where('id', '=', $params['id'])->delete();
+            return $response->withStatus(200)->withRedirect('/admin/pending-users');
+        } else if (array_key_exists('approve', $params)) {
+            UserModel::where('id', '=', $params['id'])->update(['approved' => '1']);
+            return $response->withStatus(200)->withRedirect('/admin/pending-users');
+        } else {
+            return $response->withStatus(401)->withRedirect('/admin/pending-users');
         }
     }
 
