@@ -61,6 +61,9 @@ class UserController
 
     public function pendingUsersPost($request, $response, $args)
     {
+        if (!($this->container->get('session')->exists('email') && $this->container->get('session')->isAdmin)) {
+            return $response->withRedirect('/login')->withoutHeader('WWW-Authenticate');
+        }
         $params = $request->getParsedBody();
         if (array_key_exists('decline', $params)) {
             UserModel::where('id', '=', $params['id'])->delete();
