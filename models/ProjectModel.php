@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use FormManager\Factory as F;
 use Illuminate\Database\Eloquent\Model;
 
 class ProjectModel extends Model
@@ -28,8 +29,10 @@ class ProjectModel extends Model
             'humans' => F::checkbox("This study involves human participants"),
             'children' => F::checkbox("This study involves children"),
             'summary' => F::textarea("Please detail, in full, how this study will be carried out"),
+            'confirm' => F::checkbox("I confirm that the above information is correct and in accordance with the university's ethical policy"),
+            '' => F::submit("Submit"),
         ])->setAttributes([
-            'action' => '/submit-project',
+            'action' => '/new-project',
             'method' => 'post',
         ]);
     }
