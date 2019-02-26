@@ -10,3 +10,5 @@ $app->post('/login', 'Controllers\\UserController:loginpost');
 $app->get('/logout', 'Controllers\\UserController:logout');
 $app->get('/signup', 'Controllers\\UserController:signup');
 $app->post('/signup', 'Controllers\\UserController:signupPost');
+$app->get('/new-project', 'Controllers\\ProjectController:newProject');
+$app->post('/new-project', 'Controllers\\ProjectController:newProjectPost');
