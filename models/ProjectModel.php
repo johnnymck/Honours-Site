@@ -20,4 +20,17 @@ class ProjectModel extends Model
         $this->revisionNumber = 0;
         $this->time = time();
     }
+
+    public static function getProjectForm()
+    {
+        return F::form([
+            'medicine' => F::checkbox("This is a medical/clinical study"),
+            'humans' => F::checkbox("This study involves human participants"),
+            'children' => F::checkbox("This study involves children"),
+            'summary' => F::textarea("Please detail, in full, how this study will be carried out"),
+        ])->setAttributes([
+            'action' => '/submit-project',
+            'method' => 'post',
+        ]);
+    }
 }
